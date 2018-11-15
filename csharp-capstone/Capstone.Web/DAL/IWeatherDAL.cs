@@ -8,7 +8,7 @@ namespace Capstone.Web.DAL
 {
     public interface IWeatherDAL
     {
-        IList<ParkWeather> GetWeathers(ParkWeather code);
+        IList<ParkWeather> GetWeathers(string code);
         //ParkWeather GetWeather(string code);
     }
 }

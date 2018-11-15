@@ -1,7 +1,45 @@
-﻿
+﻿@model Survey
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Please complete our survey: </h2>
 
+<form asp-controller="survey" asp-action="surveyresult" method="post">
+<label asp-for="Name">Name</label>
+    <input asp-for="Name" required/> 
+    <br />
+    <label asp-for="Email">Email Address</label>
+    <input asp-for="Email" required/>
+    <br />
+    <label asp-for="State">State of Residence</label>
+    <input asp-for="State" required/>
+    <br />
+    <label asp-for="ActivityLevel">Activity level</label>
+    <select asp-for="ActivityLevel" required>
+        <option></option>
+        <option value="Inactive">Inactive</option>
+        <option value="Sedentary">Sedentary</option>
+        <option value="Active">Active</option>
+        <option value="Extremely Active">Extremely Active</option>
+    </select> 
+    <br />
+    <label asp-for="ParkCode">Park Name: </label>
+    <select asp-for="ParkCode" required>
+        <option></option>
+        <option value="CVNP">Cuyahoga Valley National Park</option>
+        <option value="ENP">Everglades National Park</option>
+        <option value="GCNP">Grand Canyon National Park</option>
+        <option value="GNP">Glacier National park</option>
+        <option value="GSMNP">Great Smoky Mountains National Park</option>
+        <option value="GTNP">Grand Teto National Park</option>
+        <option value="MRNP">Mount Rainer National Park</option>
+        <option value="RMNP">Rocky Mountain National park</option>
+        <option value="YNP">Yellowstone National Park</option>
+        <option value="YNP2">Yosemite National Park</option>
+    </select>
+    <br />
+    <br />
+    <input type="submit" value="Submit!!!!!!!" />
+
+</form>

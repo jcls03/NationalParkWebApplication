@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Capstone.Web.Extensions;
 
 namespace Capstone.Web.Controllers
 {
@@ -17,13 +19,39 @@ namespace Capstone.Web.Controllers
             this.weatherDAL = weatherDAL;
         }
 
-        public IActionResult WeatherDetail(ParkWeather code)
+        public IActionResult WeatherDetail(string code)
         {
 
             var weather = weatherDAL.GetWeathers(code);
+            string unit = GetCurrentTemperature();
+            foreach(var w in weather)
+            {
+                w.TempUnits = unit;
+                w.TemperatureConvert();
+            }
 
             return View(weather);
 
         }
+
+        private void SaveCurrentTemperature(string weather)
+        {
+            HttpContext.Session.Set<string>("Temp", weather);
+        }
+
+        private string GetCurrentTemperature()
+        {
+
+            if (HttpContext.Session.Get<string>("Temp") == null)
+            {
+                HttpContext.Session.Set<string>("Temp", "C");
+            }
+            return HttpContext.Session.Get<string>("Temp");
+        }
+
+        //public IActionResult TemperatureConvert()
+        //{
+
+        //}
     }
 }

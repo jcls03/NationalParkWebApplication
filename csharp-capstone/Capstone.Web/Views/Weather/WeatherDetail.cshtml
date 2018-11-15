@@ -6,31 +6,72 @@
 <h2>Weather</h2>
 
 @*<tr>
-    <td>
-        @for (int i = 1; i < 6; i++)
-        {
-            if (i == 1)
-            {
-                <p>Today</p>
-            }
-            <img src="~/Images/img/weather/@(Model.Forecast).png" />
-            <p>High of @Model.HighTemp</p>
-            <p>Low of @Model.LowTemp</p>
-        }
-    </td>
-</tr>*@
+    <td>*@
+<table class="table table-striped">
+    <tbody>
 
-<tr>
-    <td>
-        @foreach(var weather in Model)
+        @foreach (var weather in Model)
         {
-            @if(weather.FiveDayForecast == 1)
+        <tr>
+            @if (weather.FiveDayForecast == 1)
             {
-                <p>Today</p>
+                <td>Today</td>
             }
-            <img src="~/Images/img/weather/@(weather.Forecast).png" />
-            <p>High of @weather.HighTemp</p>
-            <p>Low of @weather.LowTemp</p>
-        }
-    </td>
-</tr>
+            <td><img src="~/Images/img/weather/@(weather.Forecast).png" /></td>
+            @if (weather.Forecast == "snow")
+            {
+                <td>Be sure to pack snowshoes</td>
+            }
+            @if (weather.Forecast == "rain")
+            {
+                <td>Be sure to pack rain gear and pack waterproof shoes</td>
+            }
+            @if (weather.Forecast == "thunderstorms")
+            {
+                <td>Seek Shelter!!!!!!! Avoid hiking on exposed ridges</td>
+            }
+            @if (weather.Forecast == "sunny")
+            {
+                <td>Ya'll best be wearing sunblock</td>
+            }
+            @if (weather.TempUnits == "F")
+            {
+                @if (weather.HighTemp > 75)
+                {
+                    <td>Bring an extra gallon of water</td>
+                }
+                @if (Math.Abs(weather.HighTemp - weather.LowTemp) > 20)
+                {
+                    <td>Wear breathable layers</td>
+                }
+                @if (weather.LowTemp < 20)
+                {
+                    <td>DANGER!!!!!!! You could get frostbite, it's so cooooooooooooooooooooooooold</td>
+                }
+            }
+            @if (weather.TempUnits == "C")
+            {
+                @if (weather.HighTemp > 24)
+                {
+                    <td>Bring an extra gallon of water</td>
+                }
+                @if (Math.Abs(weather.HighTemp - weather.LowTemp) > 11)
+                {
+                    <td>Wear breathable layers</td>
+                }
+                @if (weather.LowTemp < -6)
+                {
+                    <td>DANGER!!!!!!! You could get frostbite, it's so cooooooooooooooooooooooooold</td>
+                }
+            }
+            <td>High of @weather.HighTemp @weather.TempUnits</td>
+            <td>Low of @weather.LowTemp @weather.TempUnits</td>
+
+            @*<form asp-controller="Weather" asp-action=""*@
+        </tr>
+                }
+            
+        </tbody>
+</table>
+    @*</td>
+        </tr>*@

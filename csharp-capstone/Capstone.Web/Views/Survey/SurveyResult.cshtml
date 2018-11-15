@@ -1,7 +1,25 @@
-﻿
+﻿@model IList<Survey>
 @{
     ViewData["Title"] = "SurveyResult";
 }
 
-<h2>SurveyResult</h2>
+<h2>Survey Says....</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Park Name</td>
+            <td>Count</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var survey in Model)
+        {
+        <tr>
+            <td>@survey.NameOfPark</td>
+            <td>@survey.NoOfSurveys</td>
+        </tr>
+        }
+    </tbody>
+</table>
 

@@ -23,9 +23,26 @@ namespace Capstone.Web.Models
         public int EntryFee { get; set; }
         public int NoOfSpecies { get; set; }
         public int FiveDayForecast { get; set; }
-        public int LowTemp { get; set; }
-        public int HighTemp { get; set; }
+        public double LowTemp { get; set; }
+        public double HighTemp { get; set; }
         public string Forecast { get; set; }
         public IList<ParkWeather> parkWeathers { get; set; }
+        public string TempUnits { get; set; }
+
+        public void TemperatureConvert()
+        {
+            //if (this.TempUnits == "F")
+            //{
+            //    LowTemp = (LowTemp * 9 / 5) + 32;
+            //    HighTemp = (HighTemp * 9 / 5) + 32
+            //}
+
+
+            if (TempUnits == "C")
+            {
+                LowTemp = (LowTemp - 32) * 5 / 9;
+                HighTemp = (HighTemp - 32) * 5 / 9; 
+            }
+        }
     }
 }

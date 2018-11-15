@@ -18,7 +18,7 @@ namespace Capstone.Web.DAL
             this.connectionString = connectionString;
         }
 
-        public IList<ParkWeather> GetWeathers(ParkWeather code)
+        public IList<ParkWeather> GetWeathers(string code)
         {
             IList<ParkWeather> parkWeathers = new List<ParkWeather>();
             try
@@ -27,7 +27,7 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("SELECT * from weather WHERE parkCode = @parkCode", conn);
-                    cmd.Parameters.AddWithValue("@parkCode", code.ParkCode);
+                    cmd.Parameters.AddWithValue("@parkCode", code);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
