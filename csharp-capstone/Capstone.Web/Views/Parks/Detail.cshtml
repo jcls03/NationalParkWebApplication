@@ -1,0 +1,46 @@
+﻿@model Park
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<img class="Logo" width="400" src="~/Images/img/logo.png" />
+
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <img class="ParkImage" src="~/Images/img/parks/@(Model.ParkCode).jpg" />
+            </tr>
+            <tr>@Model.ParkName</tr>
+            <tr>Location: @Model.State</tr>
+            <tr>Acreage: @Model.Acreage</tr>
+            <tr>Elevation: @Model.ElevationFt</tr>
+            <tr>Miles of Trail: @Model.MilesOfTrail</tr>
+            <tr>Campsites: @Model.NoOfCampsites</tr>
+            <tr>Climate: @Model.Climate</tr>
+            <tr>Founded in: @Model.YearFounded</tr>
+            <tr>Annual Visitors: @Model.AnlVisitors</tr>
+            <tr>@Model.Quote</tr>
+            <tr><strong>    -@Model.Quote</strong></tr>
+            <tr>Info: @Model.Description</tr>
+            <tr>Fee: $@(Model.EntryFee).00</tr>
+            <tr>Species count: @Model.NoOfSpecies</tr>
+        </tbody>
+    </table>
+    <a asp-controller="weather" asp-action="weatherdetail" asp-route-code="@Model.ParkCode">
+    <input type="button" value="Click here for Weather Forecast!!" />
+        </a>
+@*<tr>
+    <td>
+        @for (int i = 1; i < 6; i++)
+        {
+            if (i == 1)
+            {
+                <p>Today</p>
+            }
+            <img src="~/Images/img/weather/@(Model.Forecast).png" />
+            <p>High of @Model.HighTemp</p>
+            <p>Low of @Model.LowTemp</p>
+        }
+    </td>
+</tr>*@

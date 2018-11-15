@@ -1,0 +1,36 @@
+﻿@model IList<ParkWeather>
+@{
+    ViewData["Title"] = "Weather";
+}
+
+<h2>Weather</h2>
+
+@*<tr>
+    <td>
+        @for (int i = 1; i < 6; i++)
+        {
+            if (i == 1)
+            {
+                <p>Today</p>
+            }
+            <img src="~/Images/img/weather/@(Model.Forecast).png" />
+            <p>High of @Model.HighTemp</p>
+            <p>Low of @Model.LowTemp</p>
+        }
+    </td>
+</tr>*@
+
+<tr>
+    <td>
+        @foreach(var weather in Model)
+        {
+            @if(weather.FiveDayForecast == 1)
+            {
+                <p>Today</p>
+            }
+            <img src="~/Images/img/weather/@(weather.Forecast).png" />
+            <p>High of @weather.HighTemp</p>
+            <p>Low of @weather.LowTemp</p>
+        }
+    </td>
+</tr>
