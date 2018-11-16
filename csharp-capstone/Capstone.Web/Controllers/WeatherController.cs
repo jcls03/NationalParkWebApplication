@@ -34,6 +34,21 @@ namespace Capstone.Web.Controllers
 
         }
 
+        public IActionResult ToggleTemp(string code)
+        {
+            string currentTemp = GetCurrentTemperature();
+
+            if(currentTemp == "C")
+            {
+                SaveCurrentTemperature("F");
+            }
+            else
+            {
+                SaveCurrentTemperature("C");
+            }
+            return RedirectToAction("weatherdetail", new { /*code =*/ code });
+        }
+
         private void SaveCurrentTemperature(string weather)
         {
             HttpContext.Session.Set<string>("Temp", weather);
@@ -49,9 +64,9 @@ namespace Capstone.Web.Controllers
             return HttpContext.Session.Get<string>("Temp");
         }
 
-        //public IActionResult TemperatureConvert()
-        //{
-
-        //}
+        public IActionResult TemperatureConvert()
+        {
+            return null;
+        }
     }
 }

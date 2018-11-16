@@ -1,10 +1,22 @@
-﻿@model IList<ParkWeather>
+﻿@using Capstone.Web.Controllers
+@using Capstone.Web.DAL;
+@using Capstone.Web.Models;
+@using Microsoft.AspNetCore.Mvc;
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Threading.Tasks;
+@using Microsoft.AspNetCore.Http;
+@using Capstone.Web.Extensions;
+
+@model IList<ParkWeather>
 @{
     ViewData["Title"] = "Weather";
 }
 
 <h2>Weather</h2>
 
+<p> Todays </p>
 @*<tr>
     <td>*@
 <table class="table table-striped">
@@ -12,66 +24,67 @@
 
         @foreach (var weather in Model)
         {
-        <tr>
-            @if (weather.FiveDayForecast == 1)
-            {
-                <td>Today</td>
-            }
-            <td><img src="~/Images/img/weather/@(weather.Forecast).png" /></td>
-            @if (weather.Forecast == "snow")
-            {
-                <td>Be sure to pack snowshoes</td>
-            }
-            @if (weather.Forecast == "rain")
-            {
-                <td>Be sure to pack rain gear and pack waterproof shoes</td>
-            }
-            @if (weather.Forecast == "thunderstorms")
-            {
-                <td>Seek Shelter!!!!!!! Avoid hiking on exposed ridges</td>
-            }
-            @if (weather.Forecast == "sunny")
-            {
-                <td>Ya'll best be wearing sunblock</td>
-            }
-            @if (weather.TempUnits == "F")
-            {
-                @if (weather.HighTemp > 75)
+            <tr>
+             
+                <td><img src="~/Images/img/weather/@(weather.Forecast).png" /></td>
+                @if (weather.Forecast == "snow")
                 {
-                    <td>Bring an extra gallon of water</td>
+                    <td>Be sure to pack snowshoes</td>
                 }
-                @if (Math.Abs(weather.HighTemp - weather.LowTemp) > 20)
+                @if (weather.Forecast == "rain")
                 {
-                    <td>Wear breathable layers</td>
+                    <td>Be sure to pack rain gear and pack waterproof shoes</td>
                 }
-                @if (weather.LowTemp < 20)
+                @if (weather.Forecast == "thunderstorms")
                 {
-                    <td>DANGER!!!!!!! You could get frostbite, it's so cooooooooooooooooooooooooold</td>
+                    <td>Seek Shelter!!!!!!! Avoid hiking on exposed ridges</td>
                 }
-            }
-            @if (weather.TempUnits == "C")
-            {
-                @if (weather.HighTemp > 24)
+                @if (weather.Forecast == "sunny")
                 {
-                    <td>Bring an extra gallon of water</td>
+                    <td>Ya'll best be wearing sunblock</td>
                 }
-                @if (Math.Abs(weather.HighTemp - weather.LowTemp) > 11)
+                @if (weather.TempUnits == "F")
                 {
-                    <td>Wear breathable layers</td>
+                    @if (weather.HighTemp > 75)
+                    {
+                        <td>Bring an extra gallon of water</td>
+                    }
+                    @if (Math.Abs(weather.HighTemp - weather.LowTemp) > 20)
+                    {
+                        <td>Wear breathable layers</td>
+                    }
+                    @if (weather.LowTemp < 20)
+                    {
+                        <td>DANGER!!!!!!! You could get frostbite, it's so cooooooooooooooooooooooooold</td>
+                    }
                 }
-                @if (weather.LowTemp < -6)
+                @if (weather.TempUnits == "C")
                 {
-                    <td>DANGER!!!!!!! You could get frostbite, it's so cooooooooooooooooooooooooold</td>
+                    @if (weather.HighTemp > 24)
+                    {
+                        <td>Bring an extra gallon of water</td>
+                    }
+                    @if (Math.Abs(weather.HighTemp - weather.LowTemp) > 11)
+                    {
+                        <td>Wear breathable layers</td>
+                    }
+                    @if (weather.LowTemp < -6)
+                    {
+                        <td>DANGER!!!!!!! You could get frostbite, it's so cooooooooooooooooooooooooold</td>
+                    }
                 }
-            }
-            <td>High of @weather.HighTemp @weather.TempUnits</td>
-            <td>Low of @weather.LowTemp @weather.TempUnits</td>
+                <td>High of @weather.HighTemp @weather.TempUnits</td>
+                <td>Low of @weather.LowTemp @weather.TempUnits</td>
+            </tr>
+        }
 
-            @*<form asp-controller="Weather" asp-action=""*@
-        </tr>
-                }
-            
-        </tbody>
+    </tbody>
+    @*@{
+            ((WeatherController)this.ViewContext.View).TemperatureConvert();
+        }*@
+
 </table>
-    @*</td>
-        </tr>*@
+
+<form asp-controller="Weather" asp-action="toggletemp" asp-route-code="@Model[0].ParkCode">
+    <input type="submit" value="Convert From One Temp to Another!" />
+</form>
