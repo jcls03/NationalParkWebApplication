@@ -3,6 +3,7 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url("~/Images/img/parks/cvnp.jpg")
 }
 
 /* Wrapping element */
@@ -38,4 +39,43 @@ body {
 
 img.ParkImage {
     width: 200px;
+}
+
+.parkdata {
+    color: white;
+    position: absolute;
+    left: 150px;
+    top: 500px;
+    
+}
+
+.button {
+    position: relative;
+    top: 580px;
+    right: 202px;
+}
+
+.logo {
+    width: 10px;
+}
+
+#weather {
+    column-count: 5;
+    column-gap: 20px;
+    column-width: 100px;
+    padding: 35px;
+    column-rule-style: groove;
+    column-rule-color: powderblue;
+    column-rule-width: thin;
+    border: groove powderblue;
+}
+
+#Today {
+    column-span: 1;
+    font-size: 72px;
+}
+
+.weatherpic {
+    width: 200px;
+
 }

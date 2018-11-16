@@ -3,30 +3,41 @@
     ViewData["Title"] = "Detail";
 }
 
-<img class="Logo" width="400" src="~/Images/img/logo.png" />
 
 
-    <table class="table table-striped">
+<style>
+    body {
+        background-image: url("/Images/img/parks/@(Model.ParkCode).jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<img class="Logo" width="600" src="~/Images/img/logo.png" />
+<div class="parkdata">
+    <table>
         <tbody>
-            <tr>
-                <img class="ParkImage" src="~/Images/img/parks/@(Model.ParkCode).jpg" />
-            </tr>
-            <tr>@Model.ParkName</tr>
-            <tr>Location: @Model.State</tr>
-            <tr>Acreage: @Model.Acreage</tr>
-            <tr>Elevation: @Model.ElevationFt</tr>
-            <tr>Miles of Trail: @Model.MilesOfTrail</tr>
-            <tr>Campsites: @Model.NoOfCampsites</tr>
-            <tr>Climate: @Model.Climate</tr>
-            <tr>Founded in: @Model.YearFounded</tr>
-            <tr>Annual Visitors: @Model.AnlVisitors</tr>
-            <tr>@Model.Quote</tr>
-            <tr><strong>    -@Model.Quote</strong></tr>
-            <tr>Info: @Model.Description</tr>
-            <tr>Fee: $@(Model.EntryFee).00</tr>
-            <tr>Species count: @Model.NoOfSpecies</tr>
+            <ul>
+                <li><strong>Park Name: </strong>@Model.ParkName</li>
+                <li><strong>Location: </strong>@Model.State</li>
+                <li><strong>Acreage: </strong>@Model.Acreage</li>
+                <li><strong>Elevation: </strong>@Model.ElevationFt</li>
+                <li><strong>Miles of Trail: </strong>@Model.MilesOfTrail</li>
+                <li><strong>Campsites: </strong>@Model.NoOfCampsites</li>
+                <li><strong>Climate: </strong>@Model.Climate</li>
+                <li><strong>Founded in: </strong>@Model.YearFounded</li>
+                <li><strong>Annual Visitors: </strong>@Model.AnlVisitors</li>
+                <li><strong>Species count: </strong>@Model.NoOfSpecies</li>
+                <li><i>@Model.Quote</i> <strong>    -@Model.QuoteSource</strong></li>
+                <li><strong>Info: </strong>@Model.Description</li>
+                <li><strong>Fee: </strong>$@(Model.EntryFee).00</li>
+
+            </ul>
         </tbody>
     </table>
+</div>
+<div class="button">
     <a asp-controller="weather" asp-action="weatherdetail" asp-route-code="@Model.ParkCode">
-    <input type="button" value="Click here for Weather Forecast!!" />
-        </a>
+        <input type="button" value="Click here for Weather Forecast!!" />
+    </a>
+</div>
